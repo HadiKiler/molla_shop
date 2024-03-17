@@ -39,9 +39,9 @@ def read_user(id):
 
 @blueprint.route('/user', methods=["POST"])
 def create_user():
-    username = request.json.get('username', "")
-    password = request.json.get('password', "")
-    email = request.json.get('email', "")
+    username = request.json.get('username', "").strip()
+    password = request.json.get('password', "").strip()
+    email = request.json.get('email', "").strip()
     u = User.query.filter_by(username=username).first()
     if u:
         username = username + " Copy"
@@ -59,12 +59,23 @@ def create_user():
 
 
 @blueprint.route('/user/<int:id>', methods=["PUT"])
-def upate_user(id):
-    username = request.json.get('username', "")
-    password = request.json.get('password', "")
-    email = request.json.get('email', "")
+def update_user(id):
+    username = request.json.get('username', "").strip()
+    password = request.json.get('password', "").strip()
+    email = request.json.get('email', "").strip()
     is_admin = bool(request.json.get('is_admin', ""))
-    u = User.query.filter_by(username=username).first()
+
+    users = []
+    for user in User.query.all(): # for exclude current user
+        if user.id != id:
+            users.append(user)
+
+    u = None
+    for user in users:
+        if user.username == username: # for check unique username 
+            u = user
+            break
+
     if u:
         username = username + " Copy"
     u = User.query.get(id)
