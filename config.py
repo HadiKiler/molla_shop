@@ -15,3 +15,6 @@ class ProdConfig(Config):
 class DevConfig(Config):
 	DEBUG = True
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(Config.BASE_DIR, 'shop.db')
+
+UPLOADS_DIR =  os.path.join(Config.BASE_DIR, "uploads")
+HOST = "http://localhost:5000"
