@@ -1,5 +1,5 @@
 import os
-from flask import send_from_directory, url_for
+from flask import url_for
 from flask import Blueprint, jsonify, request
 from .models import Product
 from initialize import db
@@ -8,10 +8,6 @@ from config import UPLOADS_DIR, HOST
 
 blueprint = Blueprint('product', __name__)
 
-
-@blueprint.route('/uploads/<filename>')
-def uploads(filename=''):
-    return send_from_directory(UPLOADS_DIR, filename)
 
 @blueprint.route('/product', methods=["GET"])
 def products():
@@ -24,7 +20,7 @@ def products():
             'name': item.name,
             'description': item.description,
             'price': item.price,
-            'image': HOST + url_for('product.uploads',filename=item.image)
+            'image': HOST + url_for('uploads',filename=item.image)
         })
     response = jsonify(data)
     response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
@@ -41,8 +37,9 @@ def read_product(id):
             'name': p.name,
             'description': p.description,
             'price': p.price,
-            'image': HOST + url_for('product.uploads',filename=p.image)
+            'image': HOST + url_for('uploads',filename=p.image)
         })
+
 
 @blueprint.route('/product', methods=["POST"])
 def create_product():
@@ -52,9 +49,9 @@ def create_product():
     price = request.form.get('price', "").strip()
     image = request.files.get("image","")
 
-    p = Product.query.filter_by(name=name).first()
-    if p:
-        name = name + " Copy"
+    for product in Product.query.all():
+        if product.name == name:
+            name+=" Copy"
 
     p = Product(category_id=category_id, name=name,
                  description=description, price=price,
@@ -68,7 +65,7 @@ def create_product():
             'name': p.name,
             'description': p.description,
             'price': p.price,
-            'image': HOST + url_for('product.uploads',filename=p.image)
+            'image': HOST + url_for('uploads',filename=p.image)
         })
 
 
@@ -85,14 +82,9 @@ def update_product(id):
         if product.id != id:
             products.append(product)
 
-    p = None
     for product in products:
-        if product.name == name: # for check unique name 
-            p = product
-            break
-
-    if p:
-        name = name + " Copy"
+        if product.name == name:
+            name+=" Copy"
         
     p = Product.query.get(id)
     p.category_id = category_id
@@ -109,13 +101,16 @@ def update_product(id):
             'name': p.name,
             'description': p.description,
             'price': p.price,
-            'image': HOST + url_for('product.uploads',filename=p.image)
+            'image': HOST + url_for('uploads',filename=p.image)
         })
 
 @blueprint.route('/product/<int:id>', methods=["DELETE"])
 def delete_product(id):
     p = Product.query.get(id)
-    os.remove(os.path.join(UPLOADS_DIR, p.image))
+    try:
+        os.remove(os.path.join(UPLOADS_DIR, p.image))
+    except:
+        pass
     db.session.delete(p)
     db.session.commit()
     p = {

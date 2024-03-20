@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, request
+import os
+from flask import Blueprint, jsonify, request,url_for
 from .models import User
 from initialize import db
-from flask_cors import CORS
+from config import UPLOADS_DIR, HOST
 
 blueprint = Blueprint('user', __name__)
 
@@ -17,7 +18,8 @@ def users():
             'password': item.password,
             'email': item.email,
             'is_admin': item.is_admin,
-            'register_date': item.register_date
+            'register_date': item.register_date,
+            'image': HOST + url_for('uploads',filename=item.image)
         })
     response = jsonify(data)
     response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
@@ -34,56 +36,81 @@ def read_user(id):
             'password': u.password,
             'email': u.email,
             'is_admin': u.is_admin,
+            'image': HOST + url_for('uploads',filename=u.image)
         })
 
 
 @blueprint.route('/user', methods=["POST"])
 def create_user():
-    username = request.json.get('username', "").strip()
-    password = request.json.get('password', "").strip()
-    email = request.json.get('email', "").strip()
-    is_admin = bool(request.json.get('is_admin', ""))
-    u = User.query.filter_by(username=username).first()
-    if u:
-        username = username + " Copy"
-    u = User(username=username, password=password, email=email,is_admin=is_admin)
+    username = request.form.get('username', "").strip()
+    password = request.form.get('password', "").strip()
+    email = request.form.get('email', "").strip()
+    is_admin = bool(request.form.get('is_admin', ""))
+    image = request.files.get("image","")
+
+
+    for user in User.query.all():
+        if user.username == username:
+            username+=" Copy"
+
+    # exist = True
+    # while (exist): # code check users for unique username  method-2
+    #     u = User.query.filter_by(username=username).first()
+    #     if u:
+    #         username += " Copy"
+    #         continue
+    #     break
+
+    u = User(username=username, password=password,
+              email=email,is_admin=is_admin,image=image.filename)
+    image.save(os.path.join(UPLOADS_DIR, image.filename))
     db.session.add(u)
     db.session.commit()
-    u = {
+    return jsonify({
             "id": u.id,
             'username': u.username,
             'password': u.password,
             'email': u.email,
             'is_admin': u.is_admin,
-        }
-    return jsonify(u)
+            'image': HOST + url_for('uploads',filename=u.image)
+        })
 
 
 @blueprint.route('/user/<int:id>', methods=["PUT"])
 def update_user(id):
-    username = request.json.get('username', "").strip()
-    password = request.json.get('password', "").strip()
-    email = request.json.get('email', "").strip()
-    is_admin = bool(request.json.get('is_admin', ""))
-
+    username = request.form.get('username', "").strip()
+    password = request.form.get('password', "").strip()
+    email = request.form.get('email', "").strip()
+    is_admin = bool(request.form.get('is_admin', ""))
+    image = request.files.get("image","")
     users = []
     for user in User.query.all(): # for exclude current user
         if user.id != id:
             users.append(user)
 
-    u = None
-    for user in users:
-        if user.username == username: # for check unique username 
-            u = user
-            break
 
-    if u:
-        username = username + " Copy"
+    for user in users:
+        if user.username == username:
+            username += " Copy"
+
+    # exist = True # code check users for unique username method-2
+    # while (exist):
+    #     exist = False
+    #     for user in users:
+    #         if user.username == username:
+    #             username+=" Copy"
+    #             exist =True
+    #             break
+        
     u = User.query.get(id)
     u.username = username
     u.password = password
     u.email = email
     u.is_admin = is_admin
+    if image:
+        os.remove(os.path.join(UPLOADS_DIR, u.image))
+        image.save(os.path.join(UPLOADS_DIR, image.filename))
+        u.image = image.filename
     db.session.commit()
     u = {
             "id": u.id,
@@ -91,6 +118,7 @@ def update_user(id):
             'password': u.password,
             'email': u.email,
             'is_admin': u.is_admin,
+            'image': HOST + url_for('uploads',filename=u.image)
         }
     return jsonify(u)
 
@@ -98,6 +126,10 @@ def update_user(id):
 @blueprint.route('/user/<int:id>', methods=["DELETE"])
 def delete_user(id):
     u = User.query.get(id)
+    try:
+        os.remove(os.path.join(UPLOADS_DIR, u.image))
+    except:
+        pass
     db.session.delete(u)
     db.session.commit()
     u = {
