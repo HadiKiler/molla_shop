@@ -6,7 +6,7 @@ class Category(db.Model):
     name = db.Column(db.String(80), nullable=False,unique=True)
     description = db.Column(db.Text, nullable=True)
     create_at = db.Column(db.DateTime, default=datetime.now)
-    products = db.relationship("Product", backref="category", lazy=True)
+    products = db.relationship("Product", backref="category", cascade='all, delete-orphan', lazy=True)
 
     def __repr__(self):
         return '<Category %r>' % self.name

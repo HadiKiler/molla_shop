@@ -7,11 +7,12 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=True)
     is_admin = db.Column(db.Boolean, default = False)
-    register_data = db.Column(db.DateTime, default=datetime.now)
-    adresses = db.relationship("Adress", backref="user", lazy=True)
-    orders = db.relationship("Order", backref="user", lazy=True)
-    feedbacks = db.relationship("FeedBack", backref="user", lazy=True)
-    logs = db.relationship("Log", backref="user", lazy=True)
+    register_date = db.Column(db.DateTime, default=datetime.now)
+    adresses = db.relationship("Adress", backref="user",cascade='all, delete-orphan', lazy=True)
+    orders = db.relationship("Order", backref="user",cascade='all, delete-orphan', lazy=True)
+    feedbacks = db.relationship("FeedBack",cascade='all, delete-orphan', backref="user", lazy=True)
+    logs = db.relationship("Log", backref="user",cascade='all, delete-orphan', lazy=True)
+    
     
     def __repr__(self):
         return '<User %r>' % self.username

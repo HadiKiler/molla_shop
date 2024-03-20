@@ -52,6 +52,10 @@ def create_product():
     price = request.form.get('price', "").strip()
     image = request.files.get("image","")
 
+    p = Product.query.filter_by(name=name).first()
+    if p:
+        name = name + " Copy"
+
     p = Product(category_id=category_id, name=name,
                  description=description, price=price,
                  image=image.filename)
@@ -70,13 +74,27 @@ def create_product():
 
 @blueprint.route('/product/<int:id>', methods=["PUT"])
 def update_product(id):
-    p = Product.query.get(id)
     category_id = int(request.form.get('category_id', "").strip())
     name = request.form.get('name', "").strip()
     description = request.form.get('description', "").strip()
     price = request.form.get('price', "").strip()
     image = request.files.get("image","")
 
+    products = []
+    for product in Product.query.all(): # for exclude current product
+        if product.id != id:
+            products.append(product)
+
+    p = None
+    for product in products:
+        if product.name == name: # for check unique name 
+            p = product
+            break
+
+    if p:
+        name = name + " Copy"
+        
+    p = Product.query.get(id)
     p.category_id = category_id
     p.name = name
     p.description = description

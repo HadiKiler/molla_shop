@@ -17,7 +17,7 @@ def users():
             'password': item.password,
             'email': item.email,
             'is_admin': item.is_admin,
-            'register_data': item.register_data
+            'register_date': item.register_date
         })
     response = jsonify(data)
     response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
@@ -42,10 +42,11 @@ def create_user():
     username = request.json.get('username', "").strip()
     password = request.json.get('password', "").strip()
     email = request.json.get('email', "").strip()
+    is_admin = bool(request.json.get('is_admin', ""))
     u = User.query.filter_by(username=username).first()
     if u:
         username = username + " Copy"
-    u = User(username=username, password=password, email=email)
+    u = User(username=username, password=password, email=email,is_admin=is_admin)
     db.session.add(u)
     db.session.commit()
     u = {

@@ -12,6 +12,8 @@ db.init_app(app)
 app.register_blueprint(user_blueprint)
 app.register_blueprint(product_blueprint)
 app.register_blueprint(category_blueprint)
+app.register_blueprint(order_blueprint)
+app.register_blueprint(payment_blueprint)
 
 
 from admin.models import *
