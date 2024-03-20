@@ -18,6 +18,7 @@ app.register_blueprint(order_blueprint)
 app.register_blueprint(payment_blueprint)
 app.register_blueprint(address_blueprint)
 app.register_blueprint(feedback_blueprint)
+app.register_blueprint(auth_blueprint)
 
 
 @app.route('/uploads/<filename>')
@@ -33,6 +34,11 @@ from admin.models import *
 
 with app.app_context():
     db.create_all()
+    user = User.query.first()
+    if not user:
+        user = User(username="admin",password="admin",is_admin=True)
+        db.session.add(user)
+        db.session.commit()
 
 if __name__ == '__main__':
     app.run(debug=True)

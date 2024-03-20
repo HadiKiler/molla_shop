@@ -5,3 +5,4 @@ from admin.order.routes import blueprint as order_blueprint
 from admin.payment.routes import blueprint as payment_blueprint
 from admin.address.routes import blueprint as address_blueprint
 from admin.feedback.routes import blueprint as feedback_blueprint
+from admin.auth.routes import blueprint as auth_blueprint

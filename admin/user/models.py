@@ -1,4 +1,4 @@
-from initialize import db, login_manager
+from initialize import db
 from datetime import datetime
 
 class User(db.Model):
@@ -7,7 +7,7 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=True)
     is_admin = db.Column(db.Boolean, default = False)
-    image = db.Column(db.String(80), nullable=True)
+    image = db.Column(db.String(80), default='default.png')
     register_date = db.Column(db.DateTime, default=datetime.now)
     orders = db.relationship("Order", backref="user",cascade='all, delete-orphan', lazy=True)
     feedbacks = db.relationship("FeedBack",cascade='all, delete-orphan', backref="user", lazy=True)
