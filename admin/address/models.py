@@ -1,9 +1,9 @@
 from initialize import db
 
-class Adress(db.Model):
+class Address(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer,
-            db.ForeignKey('user.id'), nullable=False) 
+    order_id = db.Column(db.Integer,
+            db.ForeignKey('order.id'), nullable=False) 
     country = db.Column(db.String(20), nullable=False)
     city = db.Column(db.String(20), nullable=False)
     address = db.Column(db.Text, nullable=False)

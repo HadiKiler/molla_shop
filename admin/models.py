@@ -1,6 +1,6 @@
-from admin.address.models import Adress
+from admin.address.models import Address
 from admin.category.models import Category
-from admin.feedback.modesl import FeedBack
+from admin.feedback.models import FeedBack
 from admin.log.models import Log
 from admin.order.models import Order, OrderItem
 from admin.payment.models import Payment

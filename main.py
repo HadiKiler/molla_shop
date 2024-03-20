@@ -14,6 +14,8 @@ app.register_blueprint(product_blueprint)
 app.register_blueprint(category_blueprint)
 app.register_blueprint(order_blueprint)
 app.register_blueprint(payment_blueprint)
+app.register_blueprint(address_blueprint)
+app.register_blueprint(feedback_blueprint)
 
 
 from admin.models import *

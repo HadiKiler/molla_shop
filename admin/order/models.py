@@ -11,7 +11,8 @@ class Order(db.Model):
     orderitems = db.relationship("OrderItem", backref="order", cascade='all, delete-orphan', lazy=True)
     payments = db.relationship("Payment", backref="order",cascade='all, delete-orphan', lazy=True)
     feedbacks = db.relationship("FeedBack", backref="order",cascade='all, delete-orphan', lazy=True)
-    
+    adresses = db.relationship("Address", backref="order",cascade='all, delete-orphan', lazy=True)
+   
     @property
     def total_amount(self):
         total = 0
