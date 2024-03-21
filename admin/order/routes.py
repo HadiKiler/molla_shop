@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from .models import Order
 from initialize import db
+from admin.log.models import save_log
 
 
 blueprint = Blueprint('order', __name__)
@@ -52,7 +53,7 @@ def update_order(id):
     o.user_id = user_id
     o.status = status
     db.session.commit()
-
+    save_log(request,f"order {id} updated !")
     return jsonify({
             "id": o.id,
             'user_id': o.user_id,
@@ -67,7 +68,7 @@ def delete_order(id):
     o = Order.query.get(id)
     db.session.delete(o)
     db.session.commit()
-
+    save_log(request,f"order {id} deleted !")
     return jsonify({
             "id": o.id,
             'user_id': o.user_id,

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from .models import FeedBack
 from initialize import db
 from ast import literal_eval
+from admin.log.models import save_log
 
 blueprint = Blueprint('feedback', __name__)
 

@@ -12,3 +12,10 @@ class Log(db.Model):
 
     def __repr__(self):
         return '<Payment %r>' % self.id
+
+def save_log(request, message):
+    print(request.headers)
+    user_id = request.headers.get("User")
+    l = Log(user_id=user_id,action=message)
+    db.session.add(l)
+    db.session.commit()

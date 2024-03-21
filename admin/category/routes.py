@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify,request
 from initialize import db
 from .models import Category
+from admin.log.models import save_log
 
 
 blueprint = Blueprint('category', __name__)
@@ -45,7 +46,7 @@ def create_category():
     c = Category(name=name, description=description)
     db.session.add(c)
     db.session.commit()
-
+    save_log(request,f"category {c.id} created !")
     return jsonify({
             "id": c.id,
             'name': c.name,
@@ -74,6 +75,7 @@ def update_category(id):
     c.name = name
     c.description = description 
     db.session.commit()
+    save_log(request,f"category {id} updated !")
     return jsonify({
             "id": c.id,
             'name': c.name,
@@ -88,6 +90,7 @@ def delete_category(id):
     c = Category.query.get(id)
     db.session.delete(c)
     db.session.commit()
+    save_log(request,f"category {id} deleted !")
     return jsonify({
             "id": c.id,
             'name': c.name,

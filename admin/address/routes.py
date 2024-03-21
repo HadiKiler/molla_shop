@@ -2,7 +2,7 @@
 from flask import Blueprint, jsonify, request
 from .models import Address
 from initialize import db
-
+from admin.log.models import save_log
 
 blueprint = Blueprint('address', __name__)
 
@@ -54,7 +54,7 @@ def update_address(id):
     a.address = address
     a.postal_code = postal_code
     db.session.commit()
-
+    save_log(request,f"address {id} updated !")
     return jsonify({
             "id": a.id,
             'order_id': a.order_id,
@@ -70,6 +70,7 @@ def delete_address(id):
     a = Address.query.get(id)
     db.session.delete(a)
     db.session.commit()
+    save_log(request,f"address {id} deleted !")
     return jsonify({
             "id": a.id,
             'order_id': a.order_id,

@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, request,url_for
 from .models import User
 from initialize import db
 from config import UPLOADS_DIR, HOST
+from admin.log.models import save_log
 
 blueprint = Blueprint('user', __name__)
 
@@ -48,7 +49,6 @@ def create_user():
     is_admin = bool(request.form.get('is_admin', ""))
     image = request.files.get("image","")
 
-
     for user in User.query.all():
         if user.username == username:
             username+=" Copy"
@@ -66,6 +66,7 @@ def create_user():
     image.save(os.path.join(UPLOADS_DIR, image.filename))
     db.session.add(u)
     db.session.commit()
+    save_log(request,f"user {u.id} created !")
     return jsonify({
             "id": u.id,
             'username': u.username,
@@ -112,6 +113,7 @@ def update_user(id):
         image.save(os.path.join(UPLOADS_DIR, image.filename))
         u.image = image.filename
     db.session.commit()
+    save_log(request,f"user {id} updated !")
     u = {
             "id": u.id,
             'username': u.username,
@@ -132,6 +134,7 @@ def delete_user(id):
         pass
     db.session.delete(u)
     db.session.commit()
+    save_log(request,f"user {id} deleted !")
     u = {
             "id": u.id,
             'username': u.username,

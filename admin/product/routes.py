@@ -4,6 +4,7 @@ from flask import Blueprint, jsonify, request
 from .models import Product
 from initialize import db
 from config import UPLOADS_DIR, HOST
+from admin.log.models import save_log
 
 
 blueprint = Blueprint('product', __name__)
@@ -59,6 +60,7 @@ def create_product():
     image.save(os.path.join(UPLOADS_DIR, image.filename))
     db.session.add(p)
     db.session.commit()
+    save_log(request,f"product {p.id} created !")
     return jsonify({
             "id": p.id,
             'category_id': p.category_id,
@@ -95,6 +97,7 @@ def update_product(id):
         image.save(os.path.join(UPLOADS_DIR, image.filename))
         p.image = image.filename
     db.session.commit()
+    save_log(request,f"product {id} updated !")
     return jsonify({
             "id": p.id,
             'category_id': p.category_id,
@@ -113,6 +116,7 @@ def delete_product(id):
         pass
     db.session.delete(p)
     db.session.commit()
+    save_log(request,f"product {id} deleted !")
     p = {
             "id": p.id,
             'category_id': p.category_id,
