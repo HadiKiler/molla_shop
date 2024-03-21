@@ -11,7 +11,7 @@ def login():
     username = request.json.get('username').strip()
     password = request.json.get('password').strip()
     user = User.query.filter_by(username=username).first()
-    if user and user.password == password:
+    if user and user.password == password and user.is_admin:
         with open(os.path.join(UPLOADS_DIR, user.image), "rb") as file:
             image = base64.b64encode(file.read()).decode('utf-8')
             return jsonify({
