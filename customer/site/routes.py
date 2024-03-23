@@ -28,13 +28,12 @@ def main():
 @blueprint.route('/shop', methods=["GET"])
 def shop():
     context = {}
-    cat_id = request.args.get('cat')
-
     products =  Product.query.all()
-    if cat_id:
-        products = Product.query.filter_by(category_id=cat_id)
-    
     context['products'] = products
     context['categories'] = Category.query.all()
 
     return render_template('site/shop.html',**context)
+
+@blueprint.route('/about-us', methods=["GET"])
+def about_us():
+    return render_template("site/about.html")

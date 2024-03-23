@@ -16,26 +16,16 @@
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
                         <li class="megamenu-container active">
-                            <a href="index.html" class="">Home</a>
+                            <a href="{{ url_for('site.main') }}" class="">Home</a>
                         </li>
                         <li>
-                            <a href="category.html" class="">Shop</a>
+                            <a href="{{ url_for('site.shop') }}" class="">Shop</a>
                         </li>
                         <li>
                             <a href="blog.html" class="sf-with-ul">Blog</a>
 
                             <ul>
-                                <li><a href="blog.html">Classic</a></li>
-                                <li><a href="blog-listing.html">Listing</a></li>
-                                <li>
-                                    <a href="#">Grid</a>
-                                    <ul>
-                                        <li><a href="blog-grid-2cols.html">Grid 2 columns</a></li>
-                                        <li><a href="blog-grid-3cols.html">Grid 3 columns</a></li>
-                                        <li><a href="blog-grid-4cols.html">Grid 4 columns</a></li>
-                                        <li><a href="blog-grid-sidebar.html">Grid sidebar</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{ url_for('site.about-us') }}">About Us</a></li>
                             </ul>
                         </li>
                     </ul>
