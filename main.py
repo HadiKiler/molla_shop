@@ -18,7 +18,7 @@ app.register_blueprint(order_blueprint)
 app.register_blueprint(payment_blueprint)
 app.register_blueprint(address_blueprint)
 app.register_blueprint(feedback_blueprint)
-app.register_blueprint(auth_blueprint)
+app.register_blueprint(admin_auth_blueprint)
 app.register_blueprint(log_blueprint)
 
 

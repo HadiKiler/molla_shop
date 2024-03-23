@@ -2,7 +2,7 @@ import base64, os
 from flask import Blueprint, request, jsonify
 from admin.user.models import User
 from config import UPLOADS_DIR
-blueprint = Blueprint('auth', __name__)
+blueprint = Blueprint('auth_admin', __name__)
 
 
 

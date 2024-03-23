@@ -109,7 +109,10 @@ def update_user(id):
     u.email = email
     u.is_admin = is_admin
     if image:
-        os.remove(os.path.join(UPLOADS_DIR, u.image))
+        try:
+            os.remove(os.path.join(UPLOADS_DIR, u.image))
+        except:
+            pass
         image.save(os.path.join(UPLOADS_DIR, image.filename))
         u.image = image.filename
     db.session.commit()

@@ -1,6 +1,5 @@
 import os
-from flask import url_for
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request,url_for
 from .models import Product
 from initialize import db
 from config import UPLOADS_DIR, HOST
@@ -57,9 +56,9 @@ def create_product():
     p = Product(category_id=category_id, name=name,
                  description=description, price=price,
                  image=image.filename)
-    image.save(os.path.join(UPLOADS_DIR, image.filename))
     db.session.add(p)
     db.session.commit()
+    image.save(os.path.join(UPLOADS_DIR, image.filename))
     save_log(request,f"product {p.id} created !")
     return jsonify({
             "id": p.id,
@@ -94,6 +93,10 @@ def update_product(id):
     p.description = description
     p.price = price
     if image:
+        try:
+            os.remove(os.path.join(UPLOADS_DIR, p.image))
+        except:
+            pass
         image.save(os.path.join(UPLOADS_DIR, image.filename))
         p.image = image.filename
     db.session.commit()
