@@ -1,6 +1,7 @@
 from flask import Flask ,send_from_directory
 from initialize import db
 from admin.routes import *
+from customer.routes import *
 from flask_cors import CORS
 from config import UPLOADS_DIR
 
@@ -20,6 +21,8 @@ app.register_blueprint(address_blueprint)
 app.register_blueprint(feedback_blueprint)
 app.register_blueprint(admin_auth_blueprint)
 app.register_blueprint(log_blueprint)
+
+app.register_blueprint(site_blueprint)
 
 
 @app.route('/uploads/<filename>')

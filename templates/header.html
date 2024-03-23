@@ -1,0 +1,54 @@
+<header class="header header-8">
+    <div class="header-middle sticky-header">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">Toggle mobile menu</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                <a href="" class="logo">
+                    <img src="{{ url_for('static',filename='assets/images/demos/demo-10/logo.png') }}" alt="Molla Logo" width="105" height="25">
+                </a>
+            </div><!-- End .header-left -->
+
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul class="menu sf-arrows">
+                        <li class="megamenu-container active">
+                            <a href="index.html" class="">Home</a>
+                        </li>
+                        <li>
+                            <a href="category.html" class="">Shop</a>
+                        </li>
+                        <li>
+                            <a href="blog.html" class="sf-with-ul">Blog</a>
+
+                            <ul>
+                                <li><a href="blog.html">Classic</a></li>
+                                <li><a href="blog-listing.html">Listing</a></li>
+                                <li>
+                                    <a href="#">Grid</a>
+                                    <ul>
+                                        <li><a href="blog-grid-2cols.html">Grid 2 columns</a></li>
+                                        <li><a href="blog-grid-3cols.html">Grid 3 columns</a></li>
+                                        <li><a href="blog-grid-4cols.html">Grid 4 columns</a></li>
+                                        <li><a href="blog-grid-sidebar.html">Grid sidebar</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <div class="dropdown cart-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                        <i class="icon-shopping-cart"></i>
+                        <span class="cart-count">2</span>
+                    </a>
+                </div><!-- End .cart-dropdown -->
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+</header><!-- End .header -->
