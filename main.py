@@ -31,9 +31,6 @@ def uploads(filename=''):
 
 
 
-
-
-
 from admin.models import *
 
 with app.app_context():

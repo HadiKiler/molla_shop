@@ -12,4 +12,4 @@ class Product(db.Model):
     orderitems = db.relationship("OrderItem", backref="product", cascade='all, delete-orphan', lazy=True)
 
     def __repr__(self):
-        return '<Product %r>' % self.name
+        return '<Product %r >' % self.id

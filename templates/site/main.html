@@ -220,209 +220,32 @@
                                 }
                             }
                         }'>
-                        <div class="product product-3 text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-primary">Sale</span>
-                                <span class="product-label label-sale">30% off</span>
-                                <a href="product.html">
-                                    <img src="{{ url_for('static',filename='assets/images/demos/demo-10/products/product-1.jpg') }}" alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                </div><!-- End .product-action-vertical -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Men’s</a>,
-                                    <a href="#">Boots</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">The North Face Back-To-Berkeley Remtlz Mesh</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    <span class="new-price">Now $50.00</span>
-                                    <span class="old-price">$84.00</span>
-                                </div><!-- End .product-price -->
-                            </div><!-- End .product-body -->
-
-                            <div class="product-footer">
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 60%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div><!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" class="active" style="background: #5f554b;"><span class="sr-only">Color name</span></a>
-                                    <a href="#" style="background: #806f55;"><span class="sr-only">Color name</span></a>
-                                </div><!-- End .product-nav -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    <a href="popup/quickView.html" class="btn-product btn-quickview"><span>quick view</span></a>
-                                </div><!-- End .product-action -->
-                            </div><!-- End .product-footer -->
-                        </div><!-- End .product -->
-
-                        <div class="product product-3 text-center">
-                            <figure class="product-media">
-                                <a href="product.html">
-                                    <img src="{{ url_for('static',filename='assets/images/demos/demo-10/products/product-2.jpg') }}" alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                </div><!-- End .product-action-vertical -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Men’s</a>,
-                                    <a href="#">Sneakers</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Nike Air Zoom Wildhorse 4</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    $77.99
-                                </div><!-- End .product-price -->
-                            </div><!-- End .product-body -->
-                                
-                            <div class="product-footer">
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 0 Reviews )</span>
-                                </div><!-- End .rating-container -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    <a href="popup/quickView.html" class="btn-product btn-quickview"><span>quick view</span></a>
-                                </div><!-- End .product-action -->
-                            </div><!-- End .product-footer -->
-                        </div><!-- End .product -->
-
+                        {% for product in last_products %}
                         <div class="product product-3 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-primary">New</span>
                                 <a href="product.html">
-                                    <img src="{{ url_for('static',filename='assets/images/demos/demo-10/products/product-3.jpg') }}" alt="Product image" class="product-image">
-                                    <img src="{{ url_for('static',filename='assets/images/demos/demo-10/products/product-3-2.jpg') }}" alt="Product image" class="product-image-hover">
+                                    <img src="{{ url_for('uploads', filename=product.image) }}" alt="Product image" class="product-image">
                                 </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                </div><!-- End .product-action-vertical -->
                             </figure><!-- End .product-media -->
 
                             <div class="product-body">
                                 <div class="product-cat">
-                                    <a href="#">Women’s</a>,
-                                    <a href="#">Sandals</a>
+                                    <a href="#">{{product.category.name}}</a>,
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Eric Michael Joan</a></h3><!-- End .product-title -->
+                                <h3 class="product-title"><a href="product.html">{{product.name}}</h3><!-- End .product-title -->
                                 <div class="product-price">
-                                    $35.99
+                                   {{product.price}}
                                 </div><!-- End .product-price -->
                             </div><!-- End .product-body -->
 
                             <div class="product-footer">
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 40%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 2 Reviews )</span>
-                                </div><!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" class="active" style="background: #666666;"><span class="sr-only">Color name</span></a>
-                                    <a href="#" style="background: #b58853;"><span class="sr-only">Color name</span></a>
-                                </div><!-- End .product-nav -->
-
                                 <div class="product-action">
                                     <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    <a href="popup/quickView.html" class="btn-product btn-quickview"><span>quick view</span></a>
                                 </div><!-- End .product-action -->
                             </div><!-- End .product-footer -->
                         </div><!-- End .product -->
-
-                        <div class="product product-3 text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-primary">Out Of Stock</span>
-                                <a href="product.html">
-                                    <img src="{{ url_for('static',filename='assets/images/demos/demo-10/products/product-4.jpg') }}" alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                </div><!-- End .product-action-vertical -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Women’s</a>,
-                                    <a href="#">Sneakers</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Nike Air Max Motion LW Racer</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    <span class="out-price">$54.99</span>
-                                </div><!-- End .product-price -->
-                            </div><!-- End .product-body -->
-
-                            <div class="product-footer">
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 3 Reviews )</span>
-                                </div><!-- End .rating-container -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    <a href="popup/quickView.html" class="btn-product btn-quickview"><span>quick view</span></a>
-                                </div><!-- End .product-action -->
-                            </div><!-- End .product-footer -->
-                        </div><!-- End .product -->
-
-                        <div class="product product-3 text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-primary">Sale</span>
-                                <span class="product-label label-sale">40% off</span>
-                                <a href="product.html">
-                                    <img src="{{ url_for('static',filename='assets/images/demos/demo-10/products/product-5.jpg') }}" alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                </div><!-- End .product-action-vertical -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Men’s</a>,
-                                    <a href="#">Sneakers</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">ASICS Tiger Gel-Lyte MT</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    <span class="new-price">Now $77.99</span>
-                                    <span class="old-price">$130.00</span>
-                                </div><!-- End .product-price -->
-                            </div><!-- End .product-body -->
-
-                            <div class="product-footer">
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 0 Reviews )</span>
-                                </div><!-- End .rating-container -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    <a href="popup/quickView.html" class="btn-product btn-quickview"><span>quick view</span></a>
-                                </div><!-- End .product-action -->
-                            </div><!-- End .product-footer -->
-                        </div><!-- End .product -->
+                        {% endfor %}
                     </div><!-- End .owl-carousel -->
                 </div><!-- .End .tab-pane -->
             </div><!-- End .tab-content -->
@@ -431,47 +254,21 @@
 
     <div class="container">
         <div class="row justify-content-center">
+            {% for category in categories %}
             <div class="col-sm-6 col-md-4">
                 <div class="banner banner-cat">
                     <a href="#">
-                        <img src="{{ url_for('static',filename='assets/images/demos/demo-10/banners/banner-5.jpg') }}" alt="Banner">
+                        <img src="{{ url_for('uploads',filename=category.image) }}" alt="Banner">
                     </a>
 
                     <div class="banner-content banner-content-overlay text-center">
-                        <h3 class="banner-title font-weight-normal">Women's</h3><!-- End .banner-title -->
-                        <h4 class="banner-subtitle">125 Products</h4><!-- End .banner-subtitle -->
+                        <h3 class="banner-title font-weight-normal">{{category.name}}</h3><!-- End .banner-title -->
+                        <h4 class="banner-subtitle">{{category.products|length}} Product</h4><!-- End .banner-subtitle -->
                         <a href="category.html" class="banner-link">SHOP NOW</a>
                     </div><!-- End .banner-content -->
                 </div><!-- End .banner -->
             </div><!-- End .col-md-4 -->
-
-            <div class="col-sm-6 col-md-4">
-                <div class="banner banner-cat">
-                    <a href="#">
-                        <img src="{{ url_for('static',filename='assets/images/demos/demo-10/banners/banner-6.jpg') }}" alt="Banner">
-                    </a>
-
-                    <div class="banner-content banner-content-overlay text-center">
-                        <h3 class="banner-title font-weight-normal">Men's</h3><!-- End .banner-title -->
-                        <h4 class="banner-subtitle">97 Products</h4><!-- End .banner-subtitle -->
-                        <a href="category.html" class="banner-link">SHOP NOW</a>
-                    </div><!-- End .banner-content -->
-                </div><!-- End .banner -->
-            </div><!-- End .col-md-4 -->
-
-            <div class="col-sm-6 col-md-4">
-                <div class="banner banner-cat">
-                    <a href="#">
-                        <img src="{{ url_for('static',filename='assets/images/demos/demo-10/banners/banner-7.jpg') }}" alt="Banner">
-                    </a>
-
-                    <div class="banner-content banner-content-overlay text-center">
-                        <h3 class="banner-title font-weight-normal">Kid's</h3><!-- End .banner-title -->
-                        <h4 class="banner-subtitle">48 Products</h4><!-- End .banner-subtitle -->
-                        <a href="category.html" class="banner-link">SHOP NOW</a>
-                    </div><!-- End .banner-content -->
-                </div><!-- End .banner -->
-            </div><!-- End .col-md-4 -->
+            {% endfor %}
         </div><!-- End .row -->
     </div><!-- End .container -->
 
@@ -479,7 +276,7 @@
 
     <div class="container">
         <div class="heading heading-center mb-3">
-            <h2 class="title-lg mb-2">Top Selling Products</h2><!-- End .title-lg text-center -->
+            <h2 class="title-lg mb-2">Top Beautiful Products</h2><!-- End .title-lg text-center -->
 
             <ul class="nav nav-pills justify-content-center" role="tablist">
                 <li class="nav-item">
@@ -492,23 +289,22 @@
             <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
                 <div class="products just-action-icons-sm">
                     <div class="row">
-
+                        {% for product in beautiful_products %}
                         <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
                             <div class="product product-3 text-center">
                                 <figure class="product-media">
                                     <a href="product.html">
-                                        <img src="{{ url_for('static',filename='assets/images/demos/demo-10/products/product-6.jpg')}}" alt="Product image" class="product-image">
+                                        <img src="{{ url_for('uploads',filename=product.image) }}" alt="Product image" class="product-image">
                                     </a>
                                 </figure><!-- End .product-media -->
 
                                 <div class="product-body">
                                     <div class="product-cat">
-                                        <a href="#">Women’s</a>,
-                                        <a href="#">Sandals</a>
+                                        <a href="#">{{product.category.name}}</a>,
                                     </div><!-- End .product-cat -->
-                                    <h3 class="product-title"><a href="product.html">Eric Michael Sandra</a></h3><!-- End .product-title -->
+                                    <h3 class="product-title"><a href="product.html">{{product.name}}</a></h3><!-- End .product-title -->
                                     <div class="product-price">
-                                        $42.99
+                                        {{product.price}}
                                     </div><!-- End .product-price -->
                                 </div><!-- End .product-body -->
                                     
@@ -519,7 +315,7 @@
                                 </div><!-- End .product-footer -->
                             </div><!-- End .product -->
                         </div><!-- End .col-6 col-md-4 col-lg-3 -->
-
+                        {% endfor %}
                     </div><!-- End .row -->
                 </div><!-- End .products -->
             </div><!-- .End .tab-pane -->
