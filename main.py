@@ -23,6 +23,7 @@ app.register_blueprint(admin_auth_blueprint)
 app.register_blueprint(log_blueprint)
 
 app.register_blueprint(site_blueprint)
+app.register_blueprint(auth_blueprint)
 
 
 @app.route('/uploads/<filename>')
