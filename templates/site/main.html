@@ -2,7 +2,6 @@
 
 
 {% block content %}
-
 <main class="main">
     <div class="container">
         <div class="intro-slider-container slider-container-ratio mb-2">
@@ -231,17 +230,17 @@
 
                             <div class="product-body">
                                 <div class="product-cat">
-                                    <a href="#">{{product.category.name}}</a>,
+                                    <span href="#">{{product.category.name}}</span>,
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">{{product.name}}</h3><!-- End .product-title -->
+                                <h3 class="product-title"><a href="{{ url_for('site.product', id=product.id)}}">{{product.name}}</h3><!-- End .product-title -->
                                 <div class="product-price">
-                                   {{product.price}}
+                                   ${{product.price}}
                                 </div><!-- End .product-price -->
                             </div><!-- End .product-body -->
 
                             <div class="product-footer">
                                 <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                    <a href="{{ url_for('site.product', id=product.id)}}" class="btn-product btn-cart"><span>add to cart</span></a>
                                 </div><!-- End .product-action -->
                             </div><!-- End .product-footer -->
                         </div><!-- End .product -->
@@ -290,31 +289,31 @@
                 <div class="products just-action-icons-sm">
                     <div class="row">
                         {% for product in beautiful_products %}
-                        <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
-                            <div class="product product-3 text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="{{ url_for('uploads',filename=product.image) }}" alt="Product image" class="product-image">
-                                    </a>
-                                </figure><!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">{{product.category.name}}</a>,
-                                    </div><!-- End .product-cat -->
-                                    <h3 class="product-title"><a href="product.html">{{product.name}}</a></h3><!-- End .product-title -->
-                                    <div class="product-price">
-                                        {{product.price}}
-                                    </div><!-- End .product-price -->
-                                </div><!-- End .product-body -->
-                                    
-                                <div class="product-footer">
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
-                                    </div><!-- End .product-action -->
-                                </div><!-- End .product-footer -->
-                            </div><!-- End .product -->
-                        </div><!-- End .col-6 col-md-4 col-lg-3 -->
+                            <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+                                <div class="product product-3 text-center">
+                                    <figure class="product-media">
+                                        <a href="{{ url_for('site.product', id=product.id)}}">
+                                            <img src="{{ url_for('uploads', filename=product.image) }}" alt="Product image" class="product-image">
+                                        </a>
+                                    </figure><!-- End .product-media -->
+        
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <span href="#">{{product.category.name}}</span>,
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title"><a href="{{ url_for('site.product', id=product.id)}}">{{product.name}}</h3><!-- End .product-title -->
+                                        <div class="product-price">
+                                        ${{product.price}}
+                                        </div><!-- End .product-price -->
+                                    </div><!-- End .product-body -->
+        
+                                    <div class="product-footer">
+                                        <div class="product-action">
+                                            <a href="{{ url_for('site.product', id=product.id)}}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        </div><!-- End .product-action -->
+                                    </div><!-- End .product-footer -->
+                                </div><!-- End .product -->
+                            </div><!-- End .col-6 col-md-4 col-lg-3 -->
                         {% endfor %}
                     </div><!-- End .row -->
                 </div><!-- End .products -->

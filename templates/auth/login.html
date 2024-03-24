@@ -27,15 +27,15 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                        <form action="#" method="POST">
+                        <form action="{{ url_for('auth.login') }}" method="POST">
                             <div class="form-group">
                                 <label for="singin-email-2">Username *</label>
-                                <input type="text" class="form-control" id="singin-email-2" name="singin-email" required>
+                                <input type="text" class="form-control" id="singin-email-2" name="username" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-group">
                                 <label for="singin-password-2">Password *</label>
-                                <input type="password" class="form-control" id="singin-password-2" name="singin-password" required>
+                                <input type="password" class="form-control" id="singin-password-2" name="password" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-footer">
@@ -45,7 +45,7 @@
                                 </button>
 
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="signin-remember-2">
+                                    <input type="checkbox" class="custom-control-input" id="signin-remember-2" name="remember">
                                     <label class="custom-control-label" for="signin-remember-2">Remember Me</label>
                                 </div><!-- End .custom-checkbox -->
 
@@ -54,15 +54,20 @@
 
                     </div><!-- .End .tab-pane -->
                     <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
-                        <form action="#" method="post">
+                        <form action="{{ url_for('auth.register') }}" method="post">
                             <div class="form-group">
                                 <label for="register-email-2">Your Username *</label>
-                                <input type="text" class="form-control" id="register-email-2" name="register-email" required>
+                                <input type="text" class="form-control" id="register-email-2" name="username" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-group">
                                 <label for="register-password-2">Password *</label>
-                                <input type="password" class="form-control" id="register-password-2" name="register-password" required>
+                                <input type="password" class="form-control" id="register-password-2" name="password" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group">
+                                <label for="register-email-2"> Email *</label>
+                                <input type="email" class="form-control" id="register-email-2" name="email" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-footer">

@@ -1,5 +1,5 @@
 from flask import Flask ,send_from_directory
-from initialize import db
+from initialize import *
 from admin.routes import *
 from customer.routes import *
 from flask_cors import CORS
@@ -9,6 +9,7 @@ app = Flask(__name__)
 cors = CORS(app)
 
 app.config.from_object('config.DevConfig') 
+login_manager.init_app(app)
 db.init_app(app) 
 
 
@@ -24,6 +25,7 @@ app.register_blueprint(log_blueprint)
 
 app.register_blueprint(site_blueprint)
 app.register_blueprint(auth_blueprint)
+app.register_blueprint(cart_blueprint)
 
 
 @app.route('/uploads/<filename>')

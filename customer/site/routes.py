@@ -33,9 +33,22 @@ def shop():
 
     return render_template('site/shop.html',**context)
 
+
+@blueprint.route('/shop/<int:id>', methods=["GET"])
+def product(id):
+    context = {}
+    product = Product.query.get_or_404(id)
+    context['related_products'] = Product.query.filter_by(category_id=product.category_id)[:7]
+    context['product'] = product
+    return render_template("site/product.html",**context)
+
+
+
 @blueprint.route('/about_us', methods=["GET"])
 def about_us():
     context = {}
     context['products'] = Product.query.all()
     context['categories'] = Category.query.all()
     return render_template("site/about.html",**context)
+
+
