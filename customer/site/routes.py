@@ -28,12 +28,14 @@ def main():
 @blueprint.route('/shop', methods=["GET"])
 def shop():
     context = {}
-    products =  Product.query.all()
-    context['products'] = products
+    context['products'] = Product.query.all()
     context['categories'] = Category.query.all()
 
     return render_template('site/shop.html',**context)
 
-@blueprint.route('/about-us', methods=["GET"])
+@blueprint.route('/about_us', methods=["GET"])
 def about_us():
-    return render_template("site/about.html")
+    context = {}
+    context['products'] = Product.query.all()
+    context['categories'] = Category.query.all()
+    return render_template("site/about.html",**context)

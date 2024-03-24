@@ -15,13 +15,16 @@
         <nav class="mobile-nav">
             <ul class="mobile-menu">
                 <li class="active">
-                    <a href="index.html">Home</a>
+                    <a href="{{ url_for('site.main')}}">Home</a>
                 </li>
                 <li>
-                    <a href="category.html">Shop</a>
+                    <a href="{{ url_for('site.shop')}}">Shop</a>
                 </li>
                 <li>
-                    <a href="blog.html">Blog</a>
+                    <a href="#">Blog</a>
+                    <ul>
+                        <li><a href="{{ url_for('site.about_us')}}">About Us</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav><!-- End .mobile-nav -->

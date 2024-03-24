@@ -3,17 +3,17 @@
 
 {% block content %}
         <main class="main">
-        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        	<div class="page-header text-center" style="background-image: url({{ url_for('static',filename='assets/images/page-header-bg.jpg') }})">
         		<div class="container">
-        			<h1 class="page-title">About us 2<span>Pages</span></h1>
+        			<h1 class="page-title">About us<span>Pages</span></h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
                 <div class="container">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">About us 2</li>
+                        <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About us</li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
@@ -25,9 +25,9 @@
                             <div class="about-text text-center mt-3">
                                 <h2 class="title text-center mb-2">Who We Are</h2><!-- End .title text-center mb-2 -->
                                 <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, uctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. </p>
-                                <img src="assets/images/about/about-2/signature.png" alt="signature" class="mx-auto mb-5">
+                                <img src="{{ url_for('static',filename='assets/images/about/about-2/signature.png') }}" alt="signature" class="mx-auto mb-5">
 
-                                <img src="assets/images/about/about-2/img-1.jpg" alt="image" class="mx-auto mb-6">
+                                <img src="{{ url_for('static',filename='assets/images/about/about-2/img-1.jpg') }}" alt="image" class="mx-auto mb-6">
                             </div><!-- End .about-text -->
                         </div><!-- End .col-lg-10 offset-1 -->
                     </div><!-- End .row -->
@@ -72,15 +72,15 @@
 
                 <div class="mb-2"></div><!-- End .mb-2 -->
 
-                <div class="bg-image pt-7 pb-5 pt-md-12 pb-md-9" style="background-image: url(assets/images/backgrounds/bg-4.jpg)">
+                <div class="bg-image pt-7 pb-5 pt-md-12 pb-md-9" style="background-image: url({{ url_for('static',filename='assets/images/backgrounds/bg-4.jpg') }})">
                     <div class="container">
                         <div class="row">
                             <div class="col-6 col-md-3">
                                 <div class="count-container text-center">
                                     <div class="count-wrapper text-white">
-                                        <span class="count" data-from="0" data-to="40" data-speed="3000" data-refresh-interval="50">0</span>k+
+                                        <span class="count" data-from="0" data-to="{{products|length}}" data-speed="3000" data-refresh-interval="50">0</span>+
                                     </div><!-- End .count-wrapper -->
-                                    <h3 class="count-title text-white">Happy Customer</h3><!-- End .count-title -->
+                                    <h3 class="count-title text-white">Product</h3><!-- End .count-title -->
                                 </div><!-- End .count-container -->
                             </div><!-- End .col-6 col-md-3 -->
 
@@ -105,9 +105,9 @@
                             <div class="col-6 col-md-3">
                                 <div class="count-container text-center">
                                     <div class="count-wrapper text-white">
-                                        <span class="count" data-from="0" data-to="15" data-speed="3000" data-refresh-interval="50">0</span>
+                                        <span class="count" data-from="0" data-to="{{categories|length}}" data-speed="3000" data-refresh-interval="50">0</span>
                                     </div><!-- End .count-wrapper -->
-                                    <h3 class="count-title text-white">Awards Won</h3><!-- End .count-title -->
+                                    <h3 class="count-title text-white">Category</h3><!-- End .count-title -->
                                 </div><!-- End .count-container -->
                             </div><!-- End .col-6 col-md-3 -->
                         </div><!-- End .row -->
@@ -119,29 +119,11 @@
                         <h2 class="title text-center mb-4">Meet Our Team</h2><!-- End .title text-center mb-2 -->
 
                         <div class="row">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="member member-2 text-center">
-                                    <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-1.jpg" alt="member photo">
-
-                                        <figcaption class="member-overlay">
-                                            <div class="social-icons social-icons-simple">
-                                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                            </div><!-- End .soial-icons -->
-                                        </figcaption><!-- End .member-overlay -->
-                                    </figure><!-- End .member-media -->
-                                    <div class="member-content">
-                                        <h3 class="member-title">Samanta Grey<span>Founder & CEO</span></h3><!-- End .member-title -->
-                                    </div><!-- End .member-content -->
-                                </div><!-- End .member -->
-                            </div><!-- End .col-lg-3 -->
 
                             <div class="col-sm-6 col-lg-3">
                                 <div class="member member-2 text-center">
                                     <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-2.jpg" alt="member photo">
+                                        <img src="{{ url_for('static',filename='assets/images/team/about-2/member-2.jpg') }}" alt="member photo">
 
                                         <figcaption class="member-overlay">
                                             <div class="social-icons social-icons-simple">
@@ -160,7 +142,7 @@
                             <div class="col-sm-6 col-lg-3">
                                 <div class="member member-2 text-center">
                                     <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-3.jpg" alt="member photo">
+                                        <img src="{{ url_for('static',filename='assets/images/team/about-2/member-3.jpg') }}" alt="member photo">
 
                                         <figcaption class="member-overlay">
                                             <div class="social-icons social-icons-simple">
@@ -179,7 +161,7 @@
                             <div class="col-sm-6 col-lg-3">
                                 <div class="member member-2 text-center">
                                     <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-4.jpg" alt="member photo">
+                                        <img src="{{ url_for('static',filename='assets/images/team/about-2/member-4.jpg') }}" alt="member photo">
 
                                         <figcaption class="member-overlay">
                                             <div class="social-icons social-icons-simple">
@@ -198,7 +180,7 @@
                             <div class="col-sm-6 col-lg-3">
                                 <div class="member member-2 text-center">
                                     <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-5.jpg" alt="member photo">
+                                        <img src="{{ url_for('static',filename='assets/images/team/about-2/member-5.jpg') }}" alt="member photo">
 
                                         <figcaption class="member-overlay">
                                             <div class="social-icons social-icons-simple">
@@ -214,66 +196,11 @@
                                 </div><!-- End .member -->
                             </div><!-- End .col-lg-3 -->
 
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="member member-2 text-center">
-                                    <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-6.jpg" alt="member photo">
 
-                                        <figcaption class="member-overlay">
-                                            <div class="social-icons social-icons-simple">
-                                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                            </div><!-- End .soial-icons -->
-                                        </figcaption><!-- End .member-overlay -->
-                                    </figure><!-- End .member-media -->
-                                    <div class="member-content">
-                                        <h3 class="member-title">Lenard Smith<span>Product Manager</span></h3><!-- End .member-title -->
-                                    </div><!-- End .member-content -->
-                                </div><!-- End .member -->
-                            </div><!-- End .col-lg-3 -->
-
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="member member-2 text-center">
-                                    <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-7.jpg" alt="member photo">
-
-                                        <figcaption class="member-overlay">
-                                            <div class="social-icons social-icons-simple">
-                                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                            </div><!-- End .soial-icons -->
-                                        </figcaption><!-- End .member-overlay -->
-                                    </figure><!-- End .member-media -->
-                                    <div class="member-content">
-                                        <h3 class="member-title">Rachel Green<span>Product Manager</span></h3><!-- End .member-title -->
-                                    </div><!-- End .member-content -->
-                                </div><!-- End .member -->
-                            </div><!-- End .col-lg-3 -->
-
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="member member-2 text-center">
-                                    <figure class="member-media">
-                                        <img src="assets/images/team/about-2/member-8.jpg" alt="member photo">
-
-                                        <figcaption class="member-overlay">
-                                            <div class="social-icons social-icons-simple">
-                                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                            </div><!-- End .soial-icons -->
-                                        </figcaption><!-- End .member-overlay -->
-                                    </figure><!-- End .member-media -->
-                                    <div class="member-content">
-                                        <h3 class="member-title">David Doe<span>Product Manager</span></h3><!-- End .member-title -->
-                                    </div><!-- End .member-content -->
-                                </div><!-- End .member -->
-                            </div><!-- End .col-lg-3 -->
                         </div><!-- End .row -->
 
                         <div class="text-center mt-3">
-                            <a href="blog.html" class="btn btn-sm btn-minwidth-lg btn-outline-primary-2">
+                            <a href="{{ url_for('site.shop')}}" class="btn btn-sm btn-minwidth-lg btn-outline-primary-2">
                                 <span>LETS START WORK</span>
                                 <i class="icon-long-arrow-right"></i>
                             </a>
@@ -292,49 +219,49 @@
                                 <div class="row justify-content-center">
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/1.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/1.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
 
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/2.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/2.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
 
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/3.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/3.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
 
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/7.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/7.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
 
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/4.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/4.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
 
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/5.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/5.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
 
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/6.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/6.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
 
                                     <div class="col-6 col-sm-4 col-md-3">
                                         <a href="#" class="brand">
-                                            <img src="assets/images/brands/9.png" alt="Brand Name">
+                                            <img src="{{ url_for('static',filename='assets/images/brands/9.png') }}" alt="Brand Name">
                                         </a>
                                     </div><!-- End .col-md-3 -->
                                 </div><!-- End .row -->
@@ -344,4 +271,5 @@
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->
+
 {% endblock %}
