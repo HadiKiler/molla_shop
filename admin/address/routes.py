@@ -17,7 +17,7 @@ def addresses():
             'order_id': item.order_id,
             'country': item.country,
             'city': item.city,
-            'address': item.address,
+            'street': item.street,
             'postal_code': item.postal_code
         })
     response = jsonify(data)
@@ -34,7 +34,7 @@ def read_address(id):
             'order_id': a.order_id,
             'country': a.country,
             'city': a.city,
-            'address': a.address,
+            'street': a.street,
             'postal_code': a.postal_code
         })
 
@@ -44,14 +44,14 @@ def update_address(id):
     order_id = request.json.get('order_id', "")
     country = request.json.get('country', "").strip()
     city = request.json.get('city', "").strip()
-    address = request.json.get('address', "").strip()
+    street = request.json.get('street', "").strip()
     postal_code = request.json.get('postal_code', "").strip()
 
     a = Address.query.get(id)
     a.order_id = order_id
     a.country = country
     a.city = city
-    a.address = address
+    a.street = street
     a.postal_code = postal_code
     db.session.commit()
     save_log(request,f"address {id} updated !")
@@ -60,7 +60,7 @@ def update_address(id):
             'order_id': a.order_id,
             'country': a.country,
             'city': a.city,
-            'address': a.address,
+            'street': a.street,
             'postal_code': a.postal_code
         })
 
@@ -76,6 +76,6 @@ def delete_address(id):
             'order_id': a.order_id,
             'country': a.country,
             'city': a.city,
-            'address': a.address,
+            'street': a.street,
             'postal_code': a.postal_code
         })

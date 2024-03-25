@@ -15,7 +15,7 @@ def login():
         password = request.form.get('password',"").strip()
         remember = bool(request.form.get('remember',""))
         user = User.query.filter_by(username=username).first()
-        if user and user.password == password:
+        if user and user.password == password and user.is_admin == False:
             login_user(user,remember=remember)
             flash("logined successfuly !", 'info')
             return redirect(url_for('site.main'))

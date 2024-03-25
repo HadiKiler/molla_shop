@@ -9,6 +9,8 @@ blueprint = Blueprint('log', __name__)
 @blueprint.route('/log', methods=["GET"])
 def logs():
     filter = literal_eval(request.args.get('filter')) # change strig to dict
+    sort = literal_eval(request.args.get('sort'))[1]
+
     qs = []
     try:
         q = filter['q']
@@ -18,6 +20,11 @@ def logs():
     except:
         qs = Log.query.all()
 
+
+    if sort == "DESC":
+        qs = list(qs)
+        qs.reverse()
+        
     data = []
     for log in qs:
         data.append({
