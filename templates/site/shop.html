@@ -7,7 +7,7 @@
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
             <div class="container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('site.main') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Shop</a></li>
                 </ol>
             </div><!-- End .container -->
@@ -33,20 +33,20 @@
                                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
-                                            <a href="product.html">
+                                            <a href="{{ url_for('site.product',id=product.id) }}">
                                                 <img src="{{ url_for('uploads',filename=product.image) }}" alt="Product image" class="product-image">
                                             </a>
 
                                             <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                <a href="{{ url_for('site.product',id=product.id) }}" class="btn-product btn-cart"><span>add to cart</span></a>
                                             </div><!-- End .product-action -->
                                         </figure><!-- End .product-media -->
 
                                         <div class="product-body">
                                             <div class="product-cat">
-                                                <a href="#">{{product.category.name}}</a>
+                                                <a href="#" role="button">{{product.category.name}}</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="product.html">{{product.name}}</a></h3><!-- End .product-title -->
+                                            <h3 class="product-title"><a href="{{ url_for('site.product',id=product.id) }}">{{product.name}}</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 <span class="out-price">${{product.price}}</span>
                                             </div><!-- End .product-price -->
@@ -79,7 +79,7 @@
                                             {% for category in categories %}
                                             <div class="filter-item">
                                                 <div class="custom-control">
-                                                    <a href="">{{category.name}}</a>
+                                                    <a href="{{ url_for('site.shop', cat=[category.id])}}">{{category.name}}</a>
                                                 </div><!-- End .custom-checkbox -->
                                             <span class="item-count">{{category.products|length}}</span>
                                             </div><!-- End .filter-item -->

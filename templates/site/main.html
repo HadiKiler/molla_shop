@@ -290,28 +290,26 @@
                     <div class="row">
                         {% for product in beautiful_products %}
                             <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
-                                <div class="product product-3 text-center">
+                                <div class="product product-7 text-center">
                                     <figure class="product-media">
-                                        <a href="{{ url_for('site.product', id=product.id)}}">
-                                            <img src="{{ url_for('uploads', filename=product.image) }}" alt="Product image" class="product-image">
+                                        <a href="{{ url_for('site.product',id=product.id) }}">
+                                            <img src="{{ url_for('uploads',filename=product.image) }}" alt="Product image" class="product-image">
                                         </a>
+
+                                        <div class="product-action">
+                                            <a href="{{ url_for('site.product',id=product.id) }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        </div><!-- End .product-action -->
                                     </figure><!-- End .product-media -->
-        
+
                                     <div class="product-body">
                                         <div class="product-cat">
-                                            <span href="#">{{product.category.name}}</span>,
+                                            <a href="#" role="button">{{product.category.name}}</a>
                                         </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="{{ url_for('site.product', id=product.id)}}">{{product.name}}</h3><!-- End .product-title -->
+                                        <h3 class="product-title"><a href="{{ url_for('site.product',id=product.id) }}">{{product.name}}</a></h3><!-- End .product-title -->
                                         <div class="product-price">
-                                        ${{product.price}}
+                                            <span class="out-price">${{product.price}}</span>
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
-        
-                                    <div class="product-footer">
-                                        <div class="product-action">
-                                            <a href="{{ url_for('site.product', id=product.id)}}" class="btn-product btn-cart"><span>add to cart</span></a>
-                                        </div><!-- End .product-action -->
-                                    </div><!-- End .product-footer -->
                                 </div><!-- End .product -->
                             </div><!-- End .col-6 col-md-4 col-lg-3 -->
                         {% endfor %}

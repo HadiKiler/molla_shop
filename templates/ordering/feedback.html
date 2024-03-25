@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<main class="main">
+
+
+    <div class="page-content pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="title mb-1">Feedback</h2><!-- End .title mb-2 -->
+                    <p class="mb-2">How satisfied were you with our service?</p>
+
+                    <form action="#" class="contact-form mb-3" method="post">
+                        <div class="row p-5">
+                        <h5>Satisfaction level of 10</h5>
+                        <input type="number" name="rating" class="form-control mb-5" value="5" min="1" max="10">
+
+                        <h5>Comment</h5>
+                        <textarea class="form-control" name="comment" cols="30" rows="4" id="cmessage" required placeholder="Message *"></textarea>
+
+                        <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                            <span>SUBMIT</span>
+                            <i class="icon-long-arrow-right"></i>
+                        </button>
+                    </form><!-- End .contact-form -->
+                </div><!-- End .col-lg-6 -->
+            </div><!-- End .row -->
+
+
+    </div><!-- End .page-content -->
+</main><!-- End .main -->
+{% endblock %}

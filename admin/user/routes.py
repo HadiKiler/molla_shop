@@ -47,7 +47,6 @@ def create_user():
     password = request.form.get('password', "").strip()
     email = request.form.get('email', "").strip()
     is_admin = bool(request.form.get('is_admin', ""))
-    image = request.files.get("image","")
 
     for user in User.query.all():
         if user.username == username:
@@ -62,8 +61,7 @@ def create_user():
     #     break
 
     u = User(username=username, password=password,
-              email=email,is_admin=is_admin,image=image.filename)
-    image.save(os.path.join(UPLOADS_DIR, image.filename))
+              email=email,is_admin=is_admin)
     db.session.add(u)
     db.session.commit()
     save_log(request,f"user {u.id} created !")
@@ -110,7 +108,8 @@ def update_user(id):
     u.is_admin = is_admin
     if image:
         try:
-            os.remove(os.path.join(UPLOADS_DIR, u.image))
+            if u.image != "default.png":
+                os.remove(os.path.join(UPLOADS_DIR, u.image))
         except:
             pass
         image.save(os.path.join(UPLOADS_DIR, image.filename))
@@ -131,10 +130,17 @@ def update_user(id):
 @blueprint.route('/user/<int:id>', methods=["DELETE"])
 def delete_user(id):
     u = User.query.get(id)
+
+    count = 0 
+    for user in User.query.all(): # for check users with the same pictures
+        if user.image == u.image:
+            count+=1
     try:
-        os.remove(os.path.join(UPLOADS_DIR, u.image))
+        if count <= 1 and u.image != 'default.png' : # for check users with the same pictures
+            os.remove(os.path.join(UPLOADS_DIR, u.image))
     except:
         pass
+    
     db.session.delete(u)
     db.session.commit()
     save_log(request,f"user {id} deleted !")

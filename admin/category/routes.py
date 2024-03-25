@@ -104,10 +104,17 @@ def update_category(id):
 @blueprint.route('/category/<int:id>', methods=["DELETE"])
 def delete_category(id):
     c = Category.query.get(id)
+
+    count = 0 
+    for category in Category.query.all(): # for check categorys with the same pictures
+        if category.image == c.image:
+            count+=1
     try:
-        os.remove(os.path.join(UPLOADS_DIR, c.image))
+        if count <= 1: # for check categorys with the same pictures
+            os.remove(os.path.join(UPLOADS_DIR, c.image))
     except:
         pass
+    
     db.session.delete(c)
     db.session.commit()
     save_log(request,f"category {id} deleted !")

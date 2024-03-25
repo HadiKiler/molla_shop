@@ -5,7 +5,7 @@ from datetime import datetime
 # status of orders
 # cart
 # sending
-# Completed
+# completed
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)

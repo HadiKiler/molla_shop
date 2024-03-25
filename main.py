@@ -25,7 +25,7 @@ app.register_blueprint(log_blueprint)
 
 app.register_blueprint(site_blueprint)
 app.register_blueprint(auth_blueprint)
-app.register_blueprint(cart_blueprint)
+app.register_blueprint(ordering_blueprint)
 
 
 @app.route('/uploads/<filename>')

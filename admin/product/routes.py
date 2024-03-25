@@ -113,10 +113,17 @@ def update_product(id):
 @blueprint.route('/product/<int:id>', methods=["DELETE"])
 def delete_product(id):
     p = Product.query.get(id)
+
+    count = 0 
+    for product in Product.query.all(): # for check products with the same pictures
+        if product.image == p.image:
+            count+=1
     try:
-        os.remove(os.path.join(UPLOADS_DIR, p.image))
+        if count <= 1: # for check products with the same pictures
+            os.remove(os.path.join(UPLOADS_DIR, p.image))
     except:
         pass
+
     db.session.delete(p)
     db.session.commit()
     save_log(request,f"product {id} deleted !")

@@ -22,7 +22,7 @@
                             <a href="{{ url_for('site.shop') }}" class="">Shop</a>
                         </li>
                         <li>
-                            <a href="blog.html" class="sf-with-ul">Blog</a>
+                            <a href="#" role="button" class="sf-with-ul">Blog</a>
 
                             <ul>
                                 <li><a href="{{ url_for('site.about_us') }}">About Us</a></li>
@@ -34,12 +34,11 @@
                 <!-- Option 1: Include in HTML -->
                 <div class="dropdown cart-dropdown">
                     {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('dashbord.cart') }}" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-display="static">
+                    <a href="{{ url_for('ordering.cart') }}" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
-                        <span class="cart-count">2</span>
                     </a>
-                    <a href="{{ url_for('auth.logout') }}" class="mb-1 ml-4 mr-2">
-                        <i style="font-size: 25px;" class="bi bi-box-arrow-left"></i>
+                    <a href="{{ url_for('ordering.dashboard') }}" class="mb-1 ml-4 mr-4">
+                        <i style="font-size: 27px;" class="bi bi-person-circle"></i>
                     </a>
                     {% else %}
                         <a class="btn btn-outline-info" style="border-radius: 10px;" href="{{url_for('auth.login')}}">Login / Register</a>

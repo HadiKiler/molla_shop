@@ -45,7 +45,7 @@
 
                             <div class="product-details-action">
                                 <div class="details-action-col">
-                                    <form action="{{ url_for('dashbord.add_item',id=product.id) }}" class="d-flex">
+                                    <form action="{{ url_for('ordering.add_item',id=product.id) }}" class="d-flex">
                                         <div class="product-details-quantity">
                                             <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
                                         </div><!-- End .product-details-quantity -->
@@ -160,7 +160,6 @@
                 {% for product in related_products %}
                 <div class="product product-7 text-center">
                     <figure class="product-media">
-                        <span class="product-label label-primary">New</span>
                         <a href="{{ url_for('site.product', id=product.id)}}">
                             <img src="{{ url_for('uploads', filename=product.image) }}" alt="Product image" class="product-image">
                         </a>
