@@ -1,4 +1,4 @@
-from flask import Flask ,send_from_directory
+from flask import Flask ,send_from_directory,url_for
 from initialize import *
 from admin.routes import *
 from customer.routes import *
@@ -10,6 +10,10 @@ cors = CORS(app)
 
 app.config.from_object('config.DevConfig') 
 login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
+login_manager.login_message = "Please Login first."
+login_manager.login_message_category = "danger"
+
 db.init_app(app) 
 
 

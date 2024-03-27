@@ -6,12 +6,13 @@ from admin.payment.models import *
 from admin.feedback.models import *
 from config import UPLOADS_DIR
 from initialize import db
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 blueprint = Blueprint('ordering', __name__)
 
 
 @blueprint.route('/cart', methods=["GET","POST"])
+@login_required
 def cart():
     context = {}
     order = None # for check if exist a cart
@@ -32,6 +33,7 @@ def cart():
 
 
 @blueprint.route('/add_item/<int:id>', methods=["GET","POST"])
+@login_required
 def add_item(id):
     quantity = int(request.args.get('quantity'))
 
@@ -63,6 +65,7 @@ def add_item(id):
 
 
 @blueprint.route('/delete_item/<int:id>')
+@login_required
 def delete_item(id):
     oi = OrderItem.query.get_or_404(id)
     db.session.delete(oi)
@@ -72,6 +75,7 @@ def delete_item(id):
 
 
 @blueprint.route('/checkout/<int:id>', methods=["GET","POST"])
+@login_required
 def checkout(id):
     order = Order.query.get_or_404(id)
     context = {}
@@ -94,11 +98,12 @@ def checkout(id):
         db.session.add(p)
         db.session.commit()
         flash("Order Placed !", 'info')
-        return redirect (url_for('dahsbord.profile'))
+        return redirect (url_for('ordering.dashboard'))
     
 
 
 @blueprint.route('/dashboard', methods=["GET","POST"])
+@login_required
 def dashboard():
     context = {}
     context['orders'] = Order.query.all()
@@ -120,6 +125,7 @@ def dashboard():
 
 
 @blueprint.route('/add_feedback/<int:id>', methods=["GET","POST"])
+@login_required
 def add_feedback(id):
     if request.method == "GET":
         return render_template('ordering/feedback.html')
