@@ -31,7 +31,7 @@ def register():
     if request.method=='POST':
         username = request.form.get('username',"").strip()
         password = request.form.get('password',"").strip()
-        email = request.form.get('password',"").strip()
+        email = request.form.get('email',"").strip()
 
         user = User.query.filter_by(username=username).first()
         if user:
