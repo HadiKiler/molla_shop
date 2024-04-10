@@ -1,4 +1,4 @@
-from flask import Flask ,send_from_directory,url_for
+from flask import Flask ,send_from_directory,jsonify
 from initialize import *
 from admin.routes import *
 from customer.routes import *
@@ -35,7 +35,6 @@ app.register_blueprint(ordering_blueprint)
 @app.route('/uploads/<filename>')
 def uploads(filename=''):
     return send_from_directory(UPLOADS_DIR, filename)
-
 
 
 from admin.models import *

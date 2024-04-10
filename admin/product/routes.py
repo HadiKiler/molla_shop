@@ -4,6 +4,9 @@ from .models import Product
 from initialize import db
 from config import UPLOADS_DIR, HOST
 from admin.log.models import save_log
+from ast import literal_eval
+from ..order.models import Order
+from datetime import datetime
 
 
 blueprint = Blueprint('product', __name__)
@@ -11,7 +14,15 @@ blueprint = Blueprint('product', __name__)
 
 @blueprint.route('/product', methods=["GET"])
 def products():
+    sort = literal_eval(request.args.get('sort'))[1]
+    start = literal_eval(request.args.get('range'))[0]
+    end = literal_eval(request.args.get('range'))[1]
     qs = Product.query.all()
+
+    if sort == "DESC":
+        qs = list(qs)
+        qs.reverse()
+
     data = []
     for item in qs:
         data.append({
@@ -22,7 +33,7 @@ def products():
             'price': item.price,
             'image': HOST + url_for('uploads',filename=item.image)
         })
-    response = jsonify(data)
+    response = jsonify(data[start:end+1])
     response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
     response.headers['Content-Range'] = len(data)
     return response
@@ -135,3 +146,51 @@ def delete_product(id):
             'price': p.price,
         }
     return jsonify(p)
+
+
+
+
+
+def calculate_sales(month):
+        total_sales = 0
+        for order in Order.query.all():
+            if order.order_date.month == month:
+                total_sales += order.total_amount
+        return total_sales
+
+@blueprint.route('/sales_chart')
+def sales_chart():
+    sales_data = []
+    for i in range(1,13):
+        sales_data.append({
+            'id': i,
+            'date': i,
+            'sales': calculate_sales(i)
+        })
+    response = jsonify(sales_data)
+    response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
+    response.headers['Content-Range'] = len(sales_data)
+    return response
+
+
+
+@blueprint.route('/product_chart')
+def product_chart():
+    products = []
+    for product in Product.query.all():
+        count = 0
+        for order in Order.query.all():
+            for orderitem in order.orderitems:
+                if orderitem.product == product:
+                    count += orderitem.quantity
+        
+        products.append({
+            'id':product.id,
+            "name": product.name,
+            "sales": count
+        })
+    products  = sorted(products, key=lambda d: d['sales'], reverse=True)
+    response = jsonify(products[:5])
+    response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
+    response.headers['Content-Range'] = len(products)
+    return response

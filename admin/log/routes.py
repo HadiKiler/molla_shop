@@ -32,6 +32,7 @@ def logs():
             'user_id': log.user_id,
             'action': log.action,
             'action_date': log.action_date,
+            'user_ip': log.user_ip
         })
     response = jsonify(data)
     response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
@@ -47,4 +48,5 @@ def read_log(id):
             'user_id': l.user_id,
             'action': l.action,
             'action_date': l.action_date,
+            'user_ip': l.user_ip
         })
