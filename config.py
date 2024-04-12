@@ -17,4 +17,4 @@ class DevConfig(Config):
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(Config.BASE_DIR, 'shop.db')
 
 UPLOADS_DIR =  os.path.join(Config.BASE_DIR, "uploads")
-HOST = "http://localhost:5000"
+HOST = "https://molla-shop.liara.run"
