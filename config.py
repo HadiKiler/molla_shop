@@ -17,4 +17,4 @@ class DevConfig(Config):
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(Config.BASE_DIR, 'storge/shop.db')
 
 UPLOADS_DIR =  os.path.join(Config.BASE_DIR, "storge/uploads")
-HOST = "https://molla-shop.liara.run"
+HOST = "https://shop-molla.liara.run"
