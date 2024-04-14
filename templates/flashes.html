@@ -1,9 +1,9 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for  category, message in messages %}
-    <div class="toast" role="alert" data-delay="1500" style="position: absolute;top: 25px;left: 45%;" aria-live="assertive" aria-atomic="true">
+    <div class="toast" role="alert" data-delay="2000" style="position: absolute;top: 25px;left: 45%;" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-{{category}}">
-            <p class=" text-white p-1">{{message}}</p>
+            <p class=" text-white p-2">{{message}}</p>
           <button type="button" class="ml-2 mb-1 ml-auto close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true" class="text-white">&times;</span>
           </button>

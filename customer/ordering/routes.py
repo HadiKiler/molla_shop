@@ -106,7 +106,7 @@ def checkout(id):
 @login_required
 def dashboard():
     context = {}
-    context['orders'] = Order.query.all()
+    context['orders'] = current_user.orders
     if request.method=="GET":
         return render_template('ordering/dashboard.html',**context)
     
